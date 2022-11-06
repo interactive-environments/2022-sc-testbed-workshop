@@ -1,0 +1,4 @@
+double value = skyNoise.generateNoise(
+                        ((double)x / elementSize) -  westwind  * skytime   / mapRange(intensity+90., 0., 100., 1000., 10.),
+                        ((double)y / elementSize) +  northwind * skytime   / mapRange(intensity+90., 0., 100., 1000., 10.),
+                        (0 + turbulence * skytime ));
