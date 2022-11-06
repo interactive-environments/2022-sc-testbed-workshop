@@ -1,0 +1,4 @@
+let v = this.skyNoise.generateNoise(
+                      (x -  (skyg.settings.westwind * this.time  )   ) / map(skyg.settings.intensity+90, 0, 100, 1000, 10),
+                      (y +  (skyg.settings.northwind * this.time )  ) / map(skyg.settings.intensity+90, 0, 100, 1000, 10),
+                      (0 +  (skyg.settings.turbulence * this.time) )) ;
