@@ -108,7 +108,7 @@ float TouchPoint::influenceOn(int x1, int y1, int z1) {
   float rInner = (float)core / 2.0;
   float trigDist = calculateTrigDistance(x1, y1, z1, x, y, z);
 
-  float returnValue = strength * linearWithCutoff(trigDist, rInner, rOuter, 1.0, 0.0);
+  float returnValue = strength * donutWithCutoff(trigDist, rInner, rOuter, 1.0, 0.0);
 
   return returnValue;
 }
