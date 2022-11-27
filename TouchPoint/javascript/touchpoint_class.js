@@ -13,7 +13,7 @@ var tpnt = {
         coreRatio : 0.5,     // 'softness' of touch - core vs. full size (0.0 - 1.0)
         size      : 600,     // initial diameter, and width of expanding shell, in mm
         strength  : 0.8,     // strength of touch (0.0 - 1.0)
-        speed     : 200,     // speed of expansion in m/s (mm/millis)
+        speed     : 0.2,     // speed of expansion in m/s (mm/millis)
         lifespan  : 2000,    // lifespan of effect
         fadeRatio : 0.7,     // percentage of lifespan before fade begins (0.0 - 1.0)
         defaultZ  : 2800     // hack - all input defaults to a plane at 2.8m
