@@ -1,0 +1,4 @@
+double value = s3d.generateNoise(
+    (x -  (westwind * time  )   ) / dmap(intensity+90, 0, 100, 1000, 10),
+    (y +  (northwind * time )  ) / dmap(intensity+90, 0, 100, 1000, 10),
+    (0 +  (turbulence * time) )) ;
