@@ -2,9 +2,9 @@ import time
 from SimpleOSC import SimpleOSCParser
 
 class PBSOSC:
-    def __init__(self, esp, socket, parser):
-        self.HOST = "172.19.13.33"
-        self.PORT = 1213
+    def __init__(self, esp, socket, parser, _HOST="172.23.4.255", _PORT=1212):
+        self.HOST = _HOST
+        self.PORT = _PORT
         self.TIMEOUT = 5
         self.INTERVAL = 5
         self.MAXBUF = 256
@@ -18,9 +18,11 @@ class PBSOSC:
         print("Connecting")
         self.socketaddr = socket.getaddrinfo(self.HOST, self.PORT)[0][4]
         self.s.connect(self.socketaddr, conntype=esp.UDP_MODE)
+#         print("Server ping", esp.ping(self.HOST), "ms")
+
 
     def loop(self, cb):
-        if self.s.available:
+        if self.s.available() > 0:
             buf = self.s.recv(self.MAXBUF)
             topic, types, output = self.parser.parseOSC(buf)
             if topic:
@@ -30,4 +32,8 @@ class PBSOSC:
         self.s.close()
         self.s.connect(self.socketaddr, conntype=self.esp.UDP_MODE)
         print("sending: ", message)
-        self.s.send(message)
+        try:
+            self.s.send(message)
+        except:
+            print("Failed to send message, trying again")
+            self.sendMessage(message)

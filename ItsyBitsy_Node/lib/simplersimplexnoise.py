@@ -123,15 +123,15 @@ class Simplex3D:
         n0, n1, n2, n3 = None, None, None, None
 
         s = (xin + yin + zin) * f3; # Simple skew factor for 3D
-        print("xin = " + str(xin))
-        print("yin = " + str(yin))
-        print("s = " + str(s))
+#         print("xin = " + str(xin))
+#         print("yin = " + str(yin))
+#         print("s = " + str(s))
         i = int(math.floor(xin + s));
 
         j = int(math.floor(yin + s));
         k = int(math.floor(zin + s));
         t = (i + j + k) * g3;
-        print("i = " + str(i))
+#         print("i = " + str(i))
 
         x0 = i - t; # Unskew the cell origin back to (x,y,z) space
         y0 = j - t;
@@ -140,7 +140,7 @@ class Simplex3D:
         y0 = yin - y0;
         z0 = zin - z0;
 
-        print(z0)
+#         print(z0)
 
         i1, j1, k1 = None, None, None # Offsets for second corner of simplex in (i,j,k) coords
         i2, j2, k2 = None, None, None # Offsets for third corner of simplex in (i,j,k) coords

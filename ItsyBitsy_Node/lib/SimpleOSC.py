@@ -5,15 +5,17 @@ class SimpleOSCParser():
 
     def writeOSC(self, topic, dataTypes, data):
         output = topic.encode('utf-8') + b'\x00'
-        output += (b'\x00' * (4 - (len(output) % 4)))
+        if (4 - (len(output) % 4))%4 > 0:
+            output += (b'\x00' * (4 - (len(output) % 4)))
         output += (","+dataTypes).encode('utf-8') + b'\x00'
-        output += (b'\x00' * (4 - (len(output) % 4)))
+        if (4 - (len(output) % 4))%4 > 0:
+            output += (b'\x00' * (4 - (len(output) % 4)))
         for i in range (len(dataTypes)):
             if dataTypes[i] == "s":
                 output += data[i].encode('utf-8') + b'\x00'
                 output += (b'\x00' * (4 - (len(output) % 4)))
             elif dataTypes[i] == "i":
-                output += data[i].to_bytes(4, 'big')
+                output += data[i].to_bytes(4, 'big', signed=True)
                 continue
             elif dataTypes[i] == "f":
                 output += struct.pack(">f", data[i])
