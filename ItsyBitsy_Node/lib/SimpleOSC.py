@@ -23,7 +23,7 @@ class SimpleOSCParser():
         return output
 
     def parseOSC(self, message: Bytes):
-        print(message)
+#         print(message)
         length = len(message)
         if length > 0:
             if length%4 == 0:

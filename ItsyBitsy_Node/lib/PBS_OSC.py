@@ -2,7 +2,7 @@ import time
 from SimpleOSC import SimpleOSCParser
 
 class PBSOSC:
-    def __init__(self, esp, socket, parser, _HOST="172.23.4.255", _PORT=1212):
+    def __init__(self, esp, socket, parser, _HOST="172.19.13.36", _PORT=1212):
         self.HOST = _HOST
         self.PORT = _PORT
         self.TIMEOUT = 5
@@ -17,6 +17,7 @@ class PBSOSC:
 
         print("Connecting")
         self.socketaddr = socket.getaddrinfo(self.HOST, self.PORT)[0][4]
+        self.socketaddrSend = socket.getaddrinfo(self.HOST, 1213)[0][4]
         self.s.connect(self.socketaddr, conntype=esp.UDP_MODE)
 #         print("Server ping", esp.ping(self.HOST), "ms")
 
@@ -30,10 +31,13 @@ class PBSOSC:
 
     def sendMessage(self, message):
         self.s.close()
-        self.s.connect(self.socketaddr, conntype=self.esp.UDP_MODE)
+        self.s.connect(self.socketaddrSend, conntype=self.esp.UDP_MODE)
         print("sending: ", message)
         try:
             self.s.send(message)
         except:
             print("Failed to send message, trying again")
             self.sendMessage(message)
+        finally:
+            self.s.close()
+            self.s.connect(self.socketaddr, conntype=self.esp.UDP_MODE)
