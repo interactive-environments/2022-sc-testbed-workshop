@@ -23,7 +23,7 @@ class PBSOSC:
 
 
     def loop(self, cb):
-        if self.s.available() > 0:
+        if self.s._available() > 0:
             buf = self.s.recv(self.MAXBUF)
             topic, types, output = self.parser.parseOSC(buf)
             if topic:
