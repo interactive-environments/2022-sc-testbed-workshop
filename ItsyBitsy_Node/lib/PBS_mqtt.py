@@ -1,6 +1,6 @@
 # Write your code here :-)
-import adafruit_esp32spi.adafruit_esp32spi_socket as socket
-import adafruit_minimqtt as miniMQTT
+from adafruit_esp32spi import adafruit_esp32spi_socket as socket
+from adafruit_minimqtt import adafruit_minimqtt as miniMQTT
 class PBSMQTT():
     def __init__(self, esp, settings, noise):
         self.settings = settings
