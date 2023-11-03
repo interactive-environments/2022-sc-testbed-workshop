@@ -23,15 +23,18 @@ class PBSOSC:
 
 
     def loop(self, cb):
-        if self.s.available() > 0:
+        if self.s._available() > 0:
             buf = self.s.recv(self.MAXBUF)
             topic, types, output = self.parser.parseOSC(buf)
             if topic:
                 cb(topic, types, output)
 
-    def sendMessage(self, message):
+    def sendMessage(self, message, _HOST=None, _PORT=None):
         self.s.close()
-        self.s.connect(self.socketaddrSend, conntype=self.esp.UDP_MODE)
+        if _HOST is not None and _PORT is not None:
+            self.s.connect(self.socket.getaddrinfo(_HOST, _PORT)[0][4], conntype=self.esp.UDP_MODE)
+        else:
+            self.s.connect(self.socketaddrSend, conntype=self.esp.UDP_MODE)
         print("sending: ", message)
         try:
             self.s.send(message)

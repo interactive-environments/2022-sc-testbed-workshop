@@ -6,7 +6,7 @@ import p9813
 ########Imports required for PBS communication#########
 from adafruit_esp32spi import adafruit_esp32spi
 from adafruit_esp32spi import adafruit_esp32spi_wifimanager
-import adafruit_esp32spi.adafruit_esp32spi_socket as socket
+from adafruit_esp32spi import adafruit_esp32spi_socket as socket
 from settings import settings
 from SimpleOSC import SimpleOSCParser
 from PBS_OSC import PBSOSC
@@ -35,7 +35,8 @@ wifi.connect()
 print("IP Address", esp.pretty_ip(esp.ip_address))
 socket.set_interface(esp)
 shiftr = PBSMQTT(esp, settings, noise)
-OSCCommunicator = PBSOSC(esp, socket, parser)
+# Change host and port if needed
+OSCCommunicator = PBSOSC(esp, socket, parser, _HOST="172.19.13.36", _PORT=1212)
 lightOn = True
 
 def OSCMessage(topic, dataTypes, output):
