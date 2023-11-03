@@ -29,9 +29,12 @@ class PBSOSC:
             if topic:
                 cb(topic, types, output)
 
-    def sendMessage(self, message):
+    def sendMessage(self, message, _HOST=None, _PORT=None):
         self.s.close()
-        self.s.connect(self.socketaddrSend, conntype=self.esp.UDP_MODE)
+        if _HOST is not None and _PORT is not None:
+            self.s.connect(self.socket.getaddrinfo(_HOST, _PORT)[0][4], conntype=self.esp.UDP_MODE)
+        else:
+            self.s.connect(self.socketaddrSend, conntype=self.esp.UDP_MODE)
         print("sending: ", message)
         try:
             self.s.send(message)
