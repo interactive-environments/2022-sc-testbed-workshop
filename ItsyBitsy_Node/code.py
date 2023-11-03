@@ -35,7 +35,8 @@ wifi.connect()
 print("IP Address", esp.pretty_ip(esp.ip_address))
 socket.set_interface(esp)
 shiftr = PBSMQTT(esp, settings, noise)
-OSCCommunicator = PBSOSC(esp, socket, parser)
+# Change host and port if needed
+OSCCommunicator = PBSOSC(esp, socket, parser, _HOST="172.19.13.36", _PORT=1212)
 lightOn = True
 
 def OSCMessage(topic, dataTypes, output):
